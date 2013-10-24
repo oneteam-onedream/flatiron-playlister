@@ -1,3 +1,4 @@
+require_relative './env.rb'
 class Song
   attr_accessor :song_name, :artist_name, :spotify_id, :length, :date_created, :album_cover, :album_name
 
