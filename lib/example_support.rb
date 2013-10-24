@@ -37,6 +37,6 @@ module Support
 end
 
 # Load the configuration.
-$appkey = IO.read("./spotify_appkey.key", encoding: "BINARY")
+$appkey = IO.read("lib/spotify_appkey.key", encoding: "BINARY")
 $username = "davidbella"
 $password = "8ntseni9"

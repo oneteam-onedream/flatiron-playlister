@@ -4,6 +4,7 @@ GEM
     coderay (1.0.9)
     ffi (1.9.0)
     libspotify (12.1.51.3)
+    logger (1.2.8)
     method_source (0.8.2)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -18,5 +19,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  logger
   pry
   spotify
