@@ -15,6 +15,31 @@ class Spotify_Finder
   # will hold information about callbacks that no longer exist, and crash upon
   # calling the first missing callback. This is *very* important!
 
+class FrameReader
+  include Enumerable
+
+  def initialize(channels, sample_type, frames_count, frames_ptr)
+    @channels = channels
+    @sample_type = sample_type
+    @size = frames_count * @channels
+    @pointer = FFI::Pointer.new(@sample_type, frames_ptr)
+  end
+
+  attr_reader :size
+
+  def each
+    return enum_for(__method__) unless block_given?
+
+    ffi_read = :"read_#{@sample_type}"
+
+    (0...size).each do |index|
+      yield @pointer[index].public_send(ffi_read)
+    end
+  end
+end
+
+plaything = Plaything.new
+
   $session_callbacks = {
     log_message: lambda do |session, message|
       $logger.info('session (log message)') { message }
@@ -30,7 +55,42 @@ class Spotify_Finder
 
     credentials_blob_updated: lambda do |session, blob|
       $logger.info('session (blob)') { blob }
-    end
+    end,
+
+    start_playback: proc do |session|
+      $logger.debug("session (player)") { "start playback" }
+      plaything.play
+    end,
+
+    stop_playback: proc do |session|
+      $logger.debug("session (player)") { "stop playback" }
+      plaything.stop
+    end,
+
+    get_audio_buffer_stats: proc do |session, stats|
+      stats[:samples] = plaything.queue_size
+      stats[:stutter] = plaything.drops
+      $logger.debug("session (player)") { "queue size [#{stats[:samples]}, #{stats[:stutter]}]" }
+    end,
+
+    music_delivery: proc do |session, format, frames, num_frames|
+      if num_frames == 0
+        $logger.debug("session (player)") { "music delivery audio discontuity" }
+        plaything.stop
+        0
+      else
+        frames = FrameReader.new(format[:channels], format[:sample_type], num_frames, frames)
+        consumed_frames = plaything.stream(frames, format.to_h)
+        $logger.debug("session (player)") { "music delivery #{consumed_frames} of #{num_frames}" }
+        consumed_frames
+      end
+    end,
+
+    end_of_track: proc do |session|
+      $end_of_track = true
+      $logger.debug("session (player)") { "end of track" }
+      plaything.stop
+    end,
   }
 
   #
@@ -84,4 +144,11 @@ class Spotify_Finder
   # Pull out the name of the track
   name = Spotify.track_name(track)
   $logger.info "Found song named: #{name}"
+
+  Spotify.try(:session_player_play, $session, false)
+  $logger.info "Now Playing #{name}"
+  Spotify.try(:session_player_load, $session, track)
+  Spotify.try(:session_player_play, $session, true)
+  Support.poll($session) { $end_of_track }
+  $logger.info "Finished Playing #{name}"
 end
