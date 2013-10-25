@@ -59,7 +59,29 @@ class Spotify_Finder
   Support.poll($session) { Spotify.session_connectionstate($session) == :logged_in }
 
   $logger.info "Logged in as #{Spotify.session_user_name($session)}."
-  binding.pry
 
-  Support.search_create($session, "Smells Like Teen Spirit", 0, 5, 0, 5, 0, 5, 0, 0, :standard, search_complete_cb)
+  # This creates a variable that holds a block (just a chunk of code to run)
+  # This variable is later passed in to be a "callback" which is just something
+  # that runs when something else finishes and decides to "call" it.
+  search_complete_cb = lambda do |search, userdata|
+    $logger.info "running search callback..."
+    $logger.info "searching for #{Spotify.search_query(search)}"
+  end
+
+  # The Spotify gem actually exposes the necessary methods through the Spotify module
+  # We don't need to manually allocate FFI pointers like I thought - that was only for a special case
+
+  # Create a Spotify::Search object - notice we set the callback to search_complete_cb
+  search = Spotify.search_create($session, "Radiohead", 0, 1, 0, 0, 0, 0, 0, 0, :standard, search_complete_cb, nil)
+  # Here is something weird - in order to wait for Spotify to return your results
+  # and fire your "callback" we have to "wait". We might as well "poll" the service
+  # to see if our callback has happened while we wait...
+  Support.poll($session) { Spotify.search_is_loaded(search) }
+  # Once we get the search back, we can pull out the track
+  track = Spotify.search_track(search, 0)
+  # Once the track is loaded...
+  Support.poll($session) { Spotify.track_is_loaded(track) }
+  # Pull out the name of the track
+  name = Spotify.track_name(track)
+  $logger.info "Found song named: #{name}"
 end
