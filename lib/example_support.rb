@@ -28,6 +28,13 @@ module Support
     end
   end
 
+  def search_create(session, query, track_offset, track_count, album_offset, album_count, artist_offset, artist_count, playlist_offset, playlist_count, search_type, callback, user_data)
+    FFI::MemoryPointer.new(Spotify::Search) do |ptr|
+      Spotify.try(:search_create, session, query, track_offset, track_count, album_offset, album_count, artist_offset, artist_count, playlist_offset, playlist_count, search_type, callback, user_data, ptr)
+      return Spotify::Search.new(ptr.read_pointer)
+    end
+  end
+
   def create_session(config)
     FFI::MemoryPointer.new(Spotify::Session) do |ptr|
       Spotify.try(:session_create, config, ptr)

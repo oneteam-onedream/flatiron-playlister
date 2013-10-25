@@ -2,6 +2,8 @@ class Spotify_Finder
   #!/usr/bin/env ruby
   # encoding: utf-8
 
+  # attach_function :search_create, [ Session, UTF8String, :int, :int, :int, :int, :int, :int, :int, :int, :search_type, :search_complete_cb, :userdata ], Search
+
   require_relative "../lib/example_support"
 
   #
@@ -57,4 +59,7 @@ class Spotify_Finder
   Support.poll($session) { Spotify.session_connectionstate($session) == :logged_in }
 
   $logger.info "Logged in as #{Spotify.session_user_name($session)}."
+  binding.pry
+
+  Support.search_create($session, "Smells Like Teen Spirit", 0, 5, 0, 5, 0, 5, 0, 0, :standard, search_complete_cb)
 end
