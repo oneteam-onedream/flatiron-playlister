@@ -39,4 +39,4 @@ end
 # Load the configuration.
 $appkey = IO.read("lib/spotify_appkey.key", encoding: "BINARY")
 $username = "davidbella"
-$blob = "GT75p9eLEK6WPTOBEc3m4aefT5vhQE8mVdzLDdkikvNB/u4UXelGhamgZNOsoqzf"
+$blob = "GT75p9eLEK6WPTOBEc3m4VVQROR14tAYG4tiXJPnx24/81GXb3ZXrSJg88OJa8Ra"
