@@ -1,3 +1,3 @@
 require_relative '../config/env.rb'
 
-spotify = Spotify_Finder.new
+# spotify = Spotify_Finder.new
