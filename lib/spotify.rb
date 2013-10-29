@@ -38,7 +38,7 @@ class FrameReader
   end
 end
 
-plaything = Plaything.new
+#plaything = Plaything.new
 
   $session_callbacks = {
     log_message: lambda do |session, message|
