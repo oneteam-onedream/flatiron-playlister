@@ -4,6 +4,6 @@ class App < Sinatra::Base
   end
 
   get '/spotify' do
-    # pass search query to spotify app
+    # pass search query to spotify api
   end
 end
