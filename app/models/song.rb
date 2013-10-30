@@ -1,18 +1,13 @@
-
 class Song
-  attr_accessor :song_name, :artist_name, :spotify_id, :length, :date_created, :album_cover, :album_name, :upvoters
-  attr_reader :slug
+  attr_accessor :upvoters
 
-  def initialize(spotify_id)
-    @spotify_id = spotify_id
+  def initialize
     @upvoters = ["harrypottter"]
-    @date_created = Time.now
   end
 
-  def song_name=(song_name)
-    @song_name = song_name
-    @slug= song_name.downcase.gsub(" ", "-")
-    p @slug
+  def before_save
+    @slug = @name.gsub(' ',"-")
+    super
   end
 
   def upvote(ip)
@@ -21,10 +16,8 @@ class Song
     else
       @upvoters << ip
     end
-    @upvoters
+    @upvotes = @upvoters.length
+    self.update(:upvotes => @upvotes)
   end
 
-  def upvote_count
-    @upvoters.length
-  end  
 end

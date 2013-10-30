@@ -2,6 +2,8 @@ require "bundler/setup"
 
 Bundler.require
 
+DB = Sequel.connect("sqlite://#{Dir.pwd}/db/playlister.db")
+
 require_relative '../app/models/song'
 require_relative '../app/models/playlist'
 # require_relative '../lib/spotify'
