@@ -1,7 +1,7 @@
 <style type="text/css">a {text-decoration: none}</style>
 <ul>
   <% Playlist.sort.each do |song| %>
-  <li> <%= song.upvote_count %> - <a href="/songs/<%= song.slug %>/upvote"> ۩ </a>   <%= song.spotify_id %>  </li>
+  <li> <%= song.upvote_count %> - <a href="/songs/<%= song.slug %>/upvote"> <img src="/img/vote_img.png"></a>   <%= song.spotify_id %>  </li>
   <% end %>
 </ul>
 <br>

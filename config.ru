@@ -12,7 +12,7 @@ require './config/environment'
 # end
 # mount_controllers_as_middleware
 
-use Rack::Static, :root => 'public', :urls => ['/']
+use Rack::Static, :root => 'public', :urls => ['/img', '/css', '/js']
 
 # Mount the main controller as our Rack Application.
 use FrankController
