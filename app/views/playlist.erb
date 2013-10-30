@@ -1,9 +1,9 @@
 <style type="text/css">a {text-decoration: none}</style>
 
 <ul>
-  <% Playlist.sort.each_with_index do |song, i| %>
+  <% @songs.each_with_index do |song, i| %>
     <% if i < 15 %>
-      <li> <%= song.upvote_count %> - <a href="/songs/<%= song.slug %>/upvote">  █  </a>   <%= song.spotify_id %>  </li>
+      <li> <%= song.upvotes %> - <a href="/songs/<%= song.slug %>/upvote">  █  </a>   <%= song.spotify_id %>  </li>
     <% end %>
   <% end %>
 </ul>
@@ -14,6 +14,7 @@
   <input type="submit" value="search">
 </form>
 
+
 <% if @query %>
-  <a href="/playlist/add/<%= @query[:uri] %>"><%= @query[:song_name] %></a>
+  <a href="/playlist/add/<%= @query[:song_name] %>"><%= @query[:song_name] %></a>
 <% end %>

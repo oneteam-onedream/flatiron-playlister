@@ -9,9 +9,9 @@ require_relative '../app/models/playlist'
 # require_relative '../lib/spotify'
 require_relative '../spotify-junk/spotify_moc'
 require_relative '../app/controllers/application_controller'
-require_relative '../app/controllers/frank_controller'
+require_relative '../app/controllers/playlist_controller'
 
-
+Playlist.create
 
 #fancy way to load relatives --
 # def load_dirs(array)

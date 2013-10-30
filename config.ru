@@ -15,5 +15,5 @@ require './config/environment'
 use Rack::Static, :root => 'public', :urls => ['/img', '/css', '/js']
 
 # Mount the main controller as our Rack Application.
-use FrankController
+use PlaylistController
 run ApplicationController

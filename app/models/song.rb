@@ -1,12 +1,13 @@
-class Song
+class Song < Sequel::Model
   attr_accessor :upvoters
 
-  def initialize
+  def before_create
     @upvoters = ["harrypottter"]
+    super
   end
 
   def before_save
-    @slug = @name.gsub(' ',"-")
+    @slug = self.song_name.gsub(' ',"-")
     super
   end
 
