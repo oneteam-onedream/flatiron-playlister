@@ -1,24 +1,22 @@
 class Playlist
-  attr_accessor :songs
+    
+  SONGS = []
 
-  def initialize
-    @songs = []
-  end
-
-  def add_song(spotify_id)
+  def self.add_song(spotify_id)
     song = Song.new(spotify_id)
-    songs << song
+    song.song_name = spotify_id
+    SONGS << song
   end
 
-  def remove_song(song)
-    songs.delete(song)
+  def self.remove_song(song)
+    SONGS.delete(song)
   end
 
-  def list
-    self.sort
+  def self.list
+    sort
   end
 
-  def sort
-    songs.sort_by { |s| s.date_created }
+  def self.sort
+    SONGS.sort_by { |song| song.upvote_count}.reverse
   end
 end

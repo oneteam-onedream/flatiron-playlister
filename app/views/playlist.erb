@@ -1,5 +1,13 @@
-<% List.songs.each do |song| %>
-  <%= song.spotify_id %>
-<% end %>
+<ul>
+  <% Playlist.sort.each do |song| %>
+  <li> <%= song.upvote_count %> - <a href="/songs/<%= song.slug %>/upvote"> Upvote </a>   <%= song.spotify_id %>  </li>
+  <% end %>
+</ul>
+<br>
 
-<a href='/'>Go Home - nobody likes you</a>
+<form action="/spotify" method="get">
+  <input type="text" name="search" placeholder="enter something">
+  <input type="submit" value="search">
+</form>
+
+

@@ -15,5 +15,5 @@ require './config/environment'
 # use Rack::Static, :root => 'public', :urls => ['/']
 
 # Mount the main controller as our Rack Application.
-register Sinatra::Reloader
-run App
+use FrankController
+run ApplicationController
