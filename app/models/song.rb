@@ -16,8 +16,12 @@ class Song
   end
 
   def upvote(ip)
-    @upvoters << ip
-    @upvoters.uniq!
+    if @upvoters.include?(ip)
+      @upvoters.delete(ip)
+    else
+      @upvoters << ip
+    end
+    @upvoters
   end
 
   def upvote_count

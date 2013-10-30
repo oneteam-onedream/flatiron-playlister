@@ -12,10 +12,6 @@ class Playlist
     SONGS.delete(song)
   end
 
-  def self.list
-    sort
-  end
-
   def self.sort
     SONGS.sort_by { |song| song.upvote_count}.reverse
   end

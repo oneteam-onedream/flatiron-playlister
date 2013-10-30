@@ -1,22 +1,24 @@
 class FrankController < ApplicationController
+  enable :sessions
 
   get '/' do
     redirect '/playlist'
   end
 
   get '/spotify' do
-    # pass search query to spotify api
     @query = Spotify_Finder.search(params[:search])
-    erb :'results'
-    # Song.new(@query)
+    session[:query] = @query
+    redirect '/playlist'
   end
 
   get '/playlist/add/:uri' do
     Playlist.add_song(params[:uri])
+    session[:query] = nil
     redirect '/playlist'
   end
 
   get '/playlist' do 
+    @query = session[:query]
     erb :'playlist'
   end
 
