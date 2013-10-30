@@ -1,5 +1,5 @@
 # Load our environment.
-require './config/env'
+require './config/environment'
 
 # A method to quickly mount all our Controllers as Middleware
 # def mount_controllers_as_middleware
