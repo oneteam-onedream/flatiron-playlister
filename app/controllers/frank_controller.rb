@@ -5,6 +5,10 @@ class FrankController < ApplicationController
     redirect '/playlist'
   end
 
+  get '/master' do
+    
+  end
+
   get '/spotify' do
     @query = Spotify_Finder.search(params[:search])
     session[:query] = @query
@@ -30,3 +34,27 @@ class FrankController < ApplicationController
 
 end
 
+# HEROKU OR RASPBERRY PI
+
+# master page
+#   -master user creates 'room' with name and password
+#   -teather to spotify login
+#   -master streams songs
+#   -has user page functionality
+
+# user page
+
+
+
+# duplication!
+# Spotify functionality
+# AJAX
+#   -search results
+#   -list sorting by vote count
+#   -
+# Where to play the song?
+#   -adding to database with after_play callback
+#   -removing song from list with after_play callback
+# CSS/ page design
+# archive/ history page?
+# server/ database
