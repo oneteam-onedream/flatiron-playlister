@@ -1,24 +1,30 @@
 class Song < Sequel::Model
+  many_to_one :playlist
   attr_accessor :upvoters
 
-  def before_create
-    @upvoters = ["harrypottter"]
-    super
+  # def initialize
+  #   @upvoters = ["harrypottter"]
+  #   super
+  # end
+
+  def slugify!
+    self.slug = self.song_name.downcase.gsub(' ','-')
   end
 
   def before_save
-    @slug = self.song_name.gsub(' ',"-")
+    # self.upvotes = @upvoters.length
+    self.slugify!
     super
   end
 
-  def upvote(ip)
-    if @upvoters.include?(ip)
-      @upvoters.delete(ip)
-    else
-      @upvoters << ip
-    end
-    @upvotes = @upvoters.length
-    self.update(:upvotes => @upvotes)
-  end
-
+  # def upvote(ip)
+  #   binding.pry
+  #     if @upvoters.include?(ip)
+  #       @upvoters.delete(ip)
+  #     else
+  #       @upvoters << ip
+  #     end
+  #     @upvotes = @upvoters.length
+  #   end
+  # end
 end
