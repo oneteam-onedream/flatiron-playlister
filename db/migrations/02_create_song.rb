@@ -10,7 +10,7 @@ Sequel.migration  do
       DateTime :created_at
       String :album_name
       String :album_cover
-      Integer :upvotes
+      Integer :upvotes, :default => 1
       String :slug
     end
   end

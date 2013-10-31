@@ -2,16 +2,13 @@ class Playlist < Sequel::Model
   one_to_many :songs
 
   def add_song(spotify_hash)
-    song = Song.create do |s| 
-      s.spotify_id = spotify_hash[:id]
-      s.song_name = spotify_hash[:name]
+    Song.create do |s| 
+        s.spotify_id  =  spotify_hash[:spotify_id]
+         s.song_name  =  spotify_hash[:song_name]
+       s.artist_name  =  spotify_hash[:artist_name]
+       s.playlist_id  =  self.id
     end
-    self.songs << song
   end
-
-  # def all_songs
-  #   Song.where(:playlist_id => self.id).all
-  # end 
 
   def song_sort
     self.songs.sort_by { |song| song.upvotes }.reverse
