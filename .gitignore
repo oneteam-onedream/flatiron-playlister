@@ -1,3 +1,4 @@
 .spotify
 Gemfile.lock
-*.db
+tmp
+db/*.db
