@@ -6,7 +6,6 @@ class Playlist < Sequel::Model
         s.spotify_id  =  spotify_hash[:spotify_id]
          s.song_name  =  spotify_hash[:song_name]
        s.artist_name  =  spotify_hash[:artist_name]
-       s.upvoters = []
        s.playlist_id  =  self.id
     end
   end

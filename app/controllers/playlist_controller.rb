@@ -1,23 +1,21 @@
 class PlaylistController < ApplicationController
   enable :sessions
 
-  def upvote_or_unvote(ip)
-    if session[:song_votes]
-      if session[:song_votes][@song.slug].include?(ip)
-        @song.unvote
-        session[:song_votes][@song.slug].delete(ip)
-      else
-        @song.upvote
-        session[:song_votes][@song.slug] << ip
-      end
-    else
-      @song.upvote
-      session[:song_votes] = {@song.slug => [ip]}
-    end
-  end
+  # def upvote_or_unvote(song, ip)
+  #   if session[:song_votes].keys.include?(song.id)
+  #     if session[:song_votes][song.id].include?(ip)
+  #       song.unvote
+  #       session[:song_votes][song.id].delete(ip)
+  #     else
+  #       song.upvote
+  #       session[:song_votes][song.id] << ip
+  #     end
+  #   end
+  # end
 
   get '/' do
     redirect '/playlist'
+    session[:song_votes] = {}
   end
 
   get '/spotify' do
@@ -28,8 +26,8 @@ class PlaylistController < ApplicationController
 
   post '/playlist/add' do
     @song = Playlist[1].add_song(params[:song])
-    session[:song_votes] = {@song.slug => []}
-    # binding.pry
+    # @song.add_or_remove(request.ip)
+
     session[:query] = nil
     redirect '/playlist'
   end
@@ -37,13 +35,13 @@ class PlaylistController < ApplicationController
   get '/playlist' do 
     @query = session[:query]
     @playlist = Playlist[1]
-    @songs = @playlist.songs
+    @songs = @playlist.song_sort
     erb :'playlist'
   end
 
   get '/songs/:slug/upvote' do
     @song = Playlist[1].songs.detect {|song| song.slug == params[:slug]}
-    upvote_or_unvote(request.ip)
+    @song.vote
     redirect '/playlist'
   end
 

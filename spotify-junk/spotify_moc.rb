@@ -4,7 +4,7 @@ class Spotify_Finder
     {
       song_name: "song_name-#{query}",
       artist_name: "artist_name-#{query}",
-      spotify_id: "spotify_id-#{query}"
+      spotify_id: "#{query}"
     }
   end
 

@@ -1,6 +1,6 @@
 class Song < Sequel::Model
   many_to_one :playlist
-  attr_accessor :upvoters
+  one_to_many :voters
 
   def slugify!
     self.slug = self.song_name.downcase.gsub(' ','-')
@@ -11,11 +11,15 @@ class Song < Sequel::Model
     super
   end
 
-  def upvote
-    self.update(:upvotes => self.upvotes += 1)
-  end
+  # def add_or_remove(ip)
+  #   if Voter.find(:ip => ip)
+  #     Voter.find(:ip => ip).destroy
+  #   else 
+  #     self.voters << Voter.create{ |v| v.ip_address = ip }
+  #   end
+  # end
 
-  def unvote
-    self.update(:upvotes => self.upvotes -= 1)
+  def vote
+    self.update(:upvotes => self.upvotes += 1)
   end
 end

@@ -8,6 +8,7 @@ Sequel.migration  do
       String :spotify_id
       Integer :length
       DateTime :created_at
+      String :creator_ip
       String :album_name
       String :album_cover
       Integer :upvotes, :default => 1
