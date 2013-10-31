@@ -13,6 +13,7 @@ class PlaylistController < ApplicationController
 
   post '/playlist/add' do
     Playlist[1].add_song(params[:song])
+    # binding.pry
     session[:query] = nil
     redirect '/playlist'
   end
@@ -20,13 +21,15 @@ class PlaylistController < ApplicationController
   get '/playlist' do 
     @query = session[:query]
     @playlist = Playlist[1]
-    @songs = @playlist.songs
+    @songs = @playlist.song_sort
     erb :'playlist'
   end
 
   get '/songs/:slug/upvote' do
     @song = Playlist[1].songs.detect {|song| song.slug == params[:slug]}
+    binding.pry
     @song.upvote(request.ip)
+    # session[:song_votes] = {@song.slug=>[request.ip]}
     redirect '/playlist'
   end
 

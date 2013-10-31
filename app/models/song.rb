@@ -2,8 +2,8 @@ class Song < Sequel::Model
   many_to_one :playlist
   attr_accessor :upvoters
 
-  # def initialize
-  #   @upvoters = ["harrypottter"]
+  # def before_create
+  #   @upvoters = []
   #   super
   # end
 
@@ -17,14 +17,22 @@ class Song < Sequel::Model
     super
   end
 
-  # def upvote(ip)
-  #   binding.pry
-  #     if @upvoters.include?(ip)
-  #       @upvoters.delete(ip)
-  #     else
-  #       @upvoters << ip
-  #     end
-  #     @upvotes = @upvoters.length
+  # def not_voted?(session)
+  #   if session
+  #     !session.include?(request.ip)
+  #   else 
+  #     true
   #   end
   # end
+
+  def upvote(ip)
+      if @upvoters.include?(ip)
+        @upvoters.delete(ip)
+      else
+        @upvoters << ip
+      end
+      # if not_voted?(session)
+        self.update(:upvotes => self.upvotes += @upvoters.length)
+      # end
+  end
 end
