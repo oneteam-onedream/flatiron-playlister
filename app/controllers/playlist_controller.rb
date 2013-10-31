@@ -2,12 +2,17 @@ class PlaylistController < ApplicationController
   enable :sessions
 
   def upvote_or_unvote(ip)
-    if session[:song_votes][@song.slug].include?(ip)
-      @song.unvote
-      session[:song_votes][@song.slug].delete(ip)
+    if session[:song_votes]
+      if session[:song_votes][@song.slug].include?(ip)
+        @song.unvote
+        session[:song_votes][@song.slug].delete(ip)
+      else
+        @song.upvote
+        session[:song_votes][@song.slug] << ip
+      end
     else
       @song.upvote
-      session[:song_votes][@song.slug] << ip
+      session[:song_votes] = {@song.slug => [ip]}
     end
   end
 
