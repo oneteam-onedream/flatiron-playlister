@@ -21,11 +21,16 @@ namespace :db do
   task :nuke do |cmd, args|
     puts "Nuking the database."
 
+
+    ## this works but it's hacky ##
     DB.tables.each do |table|
-      DB.run("DROP TABLE #{table}")
+      if table != :playlists
+        DB.run("DROP TABLE #{table}")
+      end
     end
+    DB.run("DROP TABLE #{:playlists}")
   end
- 
+
   desc "Reset the database"
   task :reset => [:nuke, :migrate]
 end

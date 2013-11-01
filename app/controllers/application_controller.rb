@@ -20,6 +20,4 @@ class ApplicationController < Sinatra::Base
 
   register Sinatra::Reloader
   reload_dirs ['app/models', 'app/controllers']
-
-  Playlist.create
 end
