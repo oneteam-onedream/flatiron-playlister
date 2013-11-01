@@ -2,8 +2,8 @@ Sequel.migration do
   up do 
     create_table :voters do
       primary_key :id, :null=>false
-      String :ip_address
       foreign_key :song_id, :songs
+      String :ip_address
     end
   end
 
