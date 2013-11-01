@@ -36,7 +36,6 @@ class PlaylistController < ApplicationController
   get '/playlist' do 
     @query = session[:query]
     @playlist = Playlist[1]
-    @songs = @playlist.song_sort
     erb :'playlist'
   end
 

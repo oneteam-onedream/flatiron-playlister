@@ -1,5 +1,14 @@
 <style type="text/css">a {text-decoration: none}</style>
 
+<% @now_playing = @playlist.before_play[0] %>
+<% @songs = @playlist.song_sort %>
+
+
+<% if @now_playing %>
+Now Playing: <%= @now_playing %><br />
+<% end %>
+
+
 <ul>
   <% @songs.each_with_index do |song, i| %>
     <% if i < 15 %>
