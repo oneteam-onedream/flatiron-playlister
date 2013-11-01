@@ -14,12 +14,14 @@ class Playlist < Sequel::Model
     self.songs.sort_by { |song| song.upvotes }.reverse
   end
 
+  def songs_in_queue
+    self.songs[1..-1]
+  end
+
   def before_play
     if song_sort.length > 0
-      song = self.song_sort[0]
-      song_name = song.song_name
-      self.songs.delete(song)
-      return [song_name, self.start_time]
+      @song = self.song_sort.shift
+      return @song
     end
   end
 
@@ -33,8 +35,11 @@ class Playlist < Sequel::Model
   #   end
   # end
 
-  def after_play
-    song.voters.each { |voter| voter.destroy }
+  def after_play(song)
+    if song.voters
+      song.voters.each { |voter| voter.destroy }
+    end
+    self.songs.delete(song)
     song.destroy
     self.before_play
   end

@@ -27,8 +27,6 @@ class PlaylistController < ApplicationController
 
   post '/playlist/add' do
     @song = Playlist[1].add_song(params[:song])
-    # @song.add_or_remove(request.ip)
-
     session[:query] = nil
     redirect '/playlist'
   end
@@ -36,6 +34,9 @@ class PlaylistController < ApplicationController
   get '/playlist' do 
     @query = session[:query]
     @playlist = Playlist[1]
+    # binding.pry
+    @now_playing = @playlist.before_play 
+    @songs = @playlist.songs_in_queue
     erb :'playlist'
   end
 

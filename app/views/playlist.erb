@@ -1,18 +1,15 @@
 <style type="text/css">a {text-decoration: none}</style>
 
-<% @now_playing = @playlist.before_play[0] %>
-<% @songs = @playlist.song_sort %>
-
-
 <% if @now_playing %>
-Now Playing: <%= @now_playing %><br />
+  Now Playing: <%= @now_playing.song_name %><br />
 <% end %>
 
-
 <ul>
-  <% @songs.each_with_index do |song, i| %>
-    <% if i < 15 %>
-      <li> <%= song.upvotes %> - <a href="/songs/<%= song.slug %>/upvote">  ۩  </a>   <%= song.spotify_id %>  </li>
+  <% if @songs %>
+    <% @songs.each_with_index do |song, i| %>
+      <% if i < 15 %>
+        <li> <%= song.upvotes %> - <a href="/songs/<%= song.slug %>/upvote">  ۩  </a>   <%= song.spotify_id %>  </li>
+      <% end %>
     <% end %>
   <% end %>
 </ul>
@@ -31,4 +28,8 @@ Now Playing: <%= @now_playing %><br />
     <input type="hidden" name="song[spotify_id]" value="<%= @query[:spotify_id]%>">
     <input type="submit" value="<%= @query[:song_name] %>">
   </form>
+<% end %>
+
+<% if @now_playing %>
+  <% @playlist.after_play(@now_playing) %>
 <% end %>
