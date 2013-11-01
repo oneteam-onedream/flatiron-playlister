@@ -1,7 +1,7 @@
 Sequel.migration do
   up do 
     create_table :playlists do
-      primary_key :id
+      primary_key :id, :null=>false
     end
   end
 
