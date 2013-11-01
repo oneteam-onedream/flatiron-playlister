@@ -14,6 +14,7 @@ class PlaylistController < ApplicationController
   # end
 
   get '/' do
+    Playlist.create
     redirect '/playlist'
     session[:song_votes] = {}
   end
