@@ -1,7 +1,7 @@
 Sequel.migration  do
   up do
     create_table :songs do
-      primary_key :id
+      primary_key :id, :null=>false
       foreign_key :playlist_id, :playlists
       String :song_name
       String :artist_name
