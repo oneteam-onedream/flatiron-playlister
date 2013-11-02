@@ -9,11 +9,15 @@ class Playlist < Sequel::Model
   end
 
   def user_limit_met
-    binding.pry
+    :user_limit_met
   end
 
   def playlist_full?
     self.songs.count > 20
+  end
+
+  def playlist_full
+    :playlist_full
   end
 
   def add_song(spotify_hash, user_ip)
@@ -28,8 +32,10 @@ class Playlist < Sequel::Model
             s.creator_ip  =  user_ip
         end
       else
-        user_limit_met
+        self.user_limit_met
       end
+    else
+      playlist_full
     end
   end
 

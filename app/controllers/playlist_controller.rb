@@ -28,8 +28,21 @@ class PlaylistController < ApplicationController
 
   post '/playlist/add' do
     @song = Playlist[1].add_song(params[:song], request.ip)
+    if @song == :user_limit_met
+      redirect '/playlist/user_limit'
+    elsif @song == :playlist_full
+      redirect '/playlist/full'
+    end
     session[:queries] = nil
     redirect '/playlist'
+  end
+
+  get '/playlist/user_limit' do
+    erb :user_limit
+  end
+
+  get '/playlist/full' do
+    erb :playlist_full
   end
 
   get '/playlist' do 
