@@ -31,7 +31,6 @@ namespace :db do
     DB.run("DROP TABLE #{:playlists}")
   end
 
- 
   desc "Reset the database"
   task :reset => [:nuke, :migrate]
 end
