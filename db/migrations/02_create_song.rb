@@ -11,7 +11,7 @@ Sequel.migration  do
       String :creator_ip
       String :album_name
       String :album_cover
-      Integer :upvotes, :default => 1
+      Integer :upvotes, :default => 0
       String :slug
     end
   end

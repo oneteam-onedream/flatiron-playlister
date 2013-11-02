@@ -16,7 +16,7 @@ class PlaylistController < ApplicationController
   get '/' do
     Playlist.create
     redirect '/playlist'
-    session[:song_votes] = {}
+    #session[:song_votes] = {}
   end
 
   get '/spotify' do
@@ -52,9 +52,9 @@ class PlaylistController < ApplicationController
     erb :'playlist'
   end
 
-  get '/songs/:slug/upvote' do
-    @song = Playlist[1].songs.detect {|song| song.slug == params[:slug]}
-    @song.vote
+  get '/songs/:id/upvote' do
+    @song = Playlist[1].songs.detect {|song| song.id == params[:id].to_i}
+    @song.vote(request.ip)
     redirect '/playlist'
   end
 
