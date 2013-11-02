@@ -14,28 +14,41 @@ class PlaylistController < ApplicationController
   # end
 
   get '/' do
+    Playlist.create
     redirect '/playlist'
     session[:song_votes] = {}
   end
 
   get '/spotify' do
-    @query = Spotify_Finder.search(params[:search])
-    session[:query] = @query
+    @queries = Spotify_Finder.search(params[:search])
+    session[:queries] = @queries
     redirect '/playlist'
   end
 
   post '/playlist/add' do
-    @song = Playlist[1].add_song(params[:song])
-    # @song.add_or_remove(request.ip)
-
-    session[:query] = nil
+    @song = Playlist[1].add_song(params[:song], request.ip)
+    if @song == :user_limit_met
+      redirect '/playlist/user_limit'
+    elsif @song == :playlist_full
+      redirect '/playlist/full'
+    end
+    session[:queries] = nil
     redirect '/playlist'
   end
 
+  get '/playlist/user_limit' do
+    erb :user_limit
+  end
+
+  get '/playlist/full' do
+    erb :playlist_full
+  end
+
   get '/playlist' do 
-    @query = session[:query]
+    @queries = session[:queries]
     @playlist = Playlist[1]
-    @songs = @playlist.song_sort
+    @current_song = @playlist.current_song
+    @songs = @playlist.songs_in_queue
     erb :'playlist'
   end
 
