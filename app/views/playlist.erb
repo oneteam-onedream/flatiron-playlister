@@ -3,10 +3,11 @@
   Now playing <%= @current_song.song_name %><br />
 <% end %>
 <ul>
+
   <% if @songs %>
     <% @songs.each_with_index do |song, i| %>
       <% if i < 15 %>
-        <li> <%= song.upvotes %> - <a href="/songs/<%= song.slug %>/upvote">  ۩  </a>   <%= song.spotify_id %>  </li>
+        <li> <%= song.upvotes %> - <a href="/songs/<%= song.slug %>/upvote">  ۩  </a>   <%= song.song_name %>  </li>
       <% end %>
     <% end %>
   <% end %>
