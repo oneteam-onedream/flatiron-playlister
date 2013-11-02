@@ -52,8 +52,8 @@ class PlaylistController < ApplicationController
     erb :'playlist'
   end
 
-  get '/songs/:slug/upvote' do
-    @song = Playlist[1].songs.detect {|song| song.slug == params[:slug]}
+  get '/songs/:id/upvote' do
+    @song = Playlist[1].songs.detect {|song| song.id == params[:id].to_i}
     @song.vote(request.ip)
     redirect '/playlist'
   end

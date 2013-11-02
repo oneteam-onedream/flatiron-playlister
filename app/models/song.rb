@@ -28,6 +28,6 @@ class Song < Sequel::Model
         v.song_id = self.id
       end
     end
-    self.update(upvotes: Voter.all.select{ |voter| voter.song_id == self.id}.length)
+    self.update(upvotes: self.voters.uniq.length)
   end
 end
