@@ -20,16 +20,10 @@ namespace :db do
   desc "Nuke the database (drop all tables)"
   task :nuke do |cmd, args|
     puts "Nuking the database."
-
-
-    DB.tables.each do |table|
-      if table != :playlists && table != :songs
-        DB.run("DROP TABLE #{table}")
-      elsif table != :playlists
-        DB.run("DROP TABLE #{table}")
-      end
-    end
+    DB.run("DROP TABLE #{:voters}")
+    DB.run("DROP TABLE #{:songs}")
     DB.run("DROP TABLE #{:playlists}")
+    DB.run("DROP TABLE #{:schema_info}")
   end
 
   desc "Reset the database"
