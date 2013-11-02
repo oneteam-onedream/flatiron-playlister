@@ -21,13 +21,8 @@ namespace :db do
   task :nuke do |cmd, args|
     puts "Nuking the database."
 
-
-    ## this works but it's hacky ##
-    DB.tables.each do |table|
-      if table != :playlists
-        DB.run("DROP TABLE #{table}")
-      end
-    end
+    DB.run("DROP TABLE #{:voters}")
+    DB.run("DROP TABLE #{:songs}")
     DB.run("DROP TABLE #{:playlists}")
   end
 
