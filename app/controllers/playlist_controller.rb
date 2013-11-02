@@ -18,24 +18,24 @@ class PlaylistController < ApplicationController
     redirect '/playlist'
     session[:song_votes] = {}
   end
-
+  # Person.find(:all, :conditions => [ "category IN (?)", categories], :limit => 50)
+  # Song.find( :creator_ip => request.ip )
   get '/spotify' do
-    @query = Spotify_Finder.search(params[:search])
-    session[:query] = @query
+    @queries = Spotify_Finder.search(params[:search])
+    session[:queries] = @queries
     redirect '/playlist'
   end
 
   post '/playlist/add' do
-    @song = Playlist[1].add_song(params[:song])
-    session[:query] = nil
+    @song = Playlist[1].add_song(params[:song], request.ip)
+    session[:queries] = nil
     redirect '/playlist'
   end
 
   get '/playlist' do 
-    @query = session[:query]
+    @queries = session[:queries]
     @playlist = Playlist[1]
-    # binding.pry
-    @now_playing = @playlist.before_play 
+    @current_song = @playlist.current_song
     @songs = @playlist.songs_in_queue
     erb :'playlist'
   end

@@ -1,9 +1,7 @@
 <style type="text/css">a {text-decoration: none}</style>
-
-<% if @now_playing %>
-  Now Playing: <%= @now_playing.song_name %><br />
+<% if @current_song %>
+  Now playing <%= @current_song.song_name %><br />
 <% end %>
-
 <ul>
   <% if @songs %>
     <% @songs.each_with_index do |song, i| %>
@@ -20,16 +18,14 @@
   <input type="submit" value="search">
 </form>
 
-
-<% if @query %>
-  <form action="/playlist/add" method="post">
-    <input type="hidden" name="song[song_name]" value="<%= @query[:song_name]%>">
-    <input type="hidden" name="song[artist_name]" value="<%= @query[:artist_name]%>">
-    <input type="hidden" name="song[spotify_id]" value="<%= @query[:spotify_id]%>">
-    <input type="submit" value="<%= @query[:song_name] %>">
-  </form>
+<% if @queries %>
+  <% @queries.each do |query| %>
+    <form action="/playlist/add" method="post">
+      <input type="hidden" name="song[song_name]" value="<%= query[:song_name]%>">
+      <input type="hidden" name="song[artist_name]" value="<%= query[:artist_name]%>">
+      <input type="hidden" name="song[spotify_id]" value="<%= query[:spotify_id]%>">
+      <input type="submit" value="<%= query[:song_name] %>">
+    </form>
+  <% end %>
 <% end %>
 
-<% if @now_playing %>
-  <% @playlist.after_play(@now_playing) %>
-<% end %>
