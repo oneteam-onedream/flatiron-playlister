@@ -16,4 +16,5 @@ use Rack::Static, :root => 'public', :urls => ['/img', '/css', '/js']
 
 # Mount the main controller as our Rack Application.
 use PlaylistController
+use SpotifyController
 run ApplicationController

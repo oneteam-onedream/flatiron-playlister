@@ -5,7 +5,9 @@ require 'yaml'
 gem 'pry'
 
 gem 'plaything'
-gem 'spotify_web', :git => 'https://github.com/obrie/spotify_web'
+gem 'spotify'
+gem 'logger'
+# gem 'spotify_web', :git => 'https://github.com/obrie/spotify_web'
 
 gem 'sequel'
 gem 'sqlite3'

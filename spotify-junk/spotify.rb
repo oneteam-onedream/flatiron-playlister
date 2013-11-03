@@ -1,3 +1,4 @@
+
 class Spotify_Finder
   #!/usr/bin/env ruby
   # encoding: utf-8

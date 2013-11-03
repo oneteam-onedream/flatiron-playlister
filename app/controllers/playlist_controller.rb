@@ -19,11 +19,11 @@ class PlaylistController < ApplicationController
     #session[:song_votes] = {}
   end
 
-  get '/spotify' do
-    @queries = Spotify_Finder.search(params[:search])
-    session[:queries] = @queries
-    redirect '/playlist'
-  end
+  # get '/spotify' do
+  #   @queries = Spotify_Finder.search(params[:search])
+  #   session[:queries] = @queries
+  #   redirect '/playlist'
+  # end
 
   post '/playlist/add' do
     @song = Playlist[1].add_song(params[:song], request.ip)
