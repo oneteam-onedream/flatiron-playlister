@@ -1,0 +1,109 @@
+When you click play, this guy gets sent on the websocket
+{
+  "id":486,
+  "name":"sp/track_event",
+  "args":
+  [
+    "0:797de0ddf0a449caa4be26ebf04cf696:2131961804313100:1383435189:30ebdd22d103f8eaf907b90fe2a14039ebcac1fe:ecf0d60a4c352586d9a97ee07eb4e5785c641fb7",
+    3,
+    0
+  ]
+}
+
+Here is how you should send track progress
+{
+  "id":728,
+  "name":"sp/track_progress",
+  "args":
+  [
+    "0:93023700fe0d48819124d3111ccec98b:2131961804313100:1383436498:6424a6451de1661a0a5673019cd0e0827196a1d7:e55093bd884ca4813556fe5f003e7eec4d1127ea",
+    "unknown",
+    "unknown",
+    500,
+    89,
+    "unknown",
+    "",
+    "unknown",
+    "unknown",
+    "unknown"
+  ]
+}
+
+When you are playing a song, this gets sent (notice the "4" means pause, above "3" means play)
+{
+  "id":489,
+  "name":"sp/track_event",
+  "args":
+  [
+    "0:797de0ddf0a449caa4be26ebf04cf696:2131961804313100:1383435189:30ebdd22d103f8eaf907b90fe2a14039ebcac1fe:ecf0d60a4c352586d9a97ee07eb4e5785c641fb7",
+    4,
+    1778
+  ]
+}
+
+{
+  "id":377,
+  "name":"sp/track_end",
+  "args":
+  [
+    "0:797de0ddf0a449caa4be26ebf04cf696:2120998798232328:1383454032:30ebdd22d103f8eaf907b90fe2a14039ebcac1fe:98b32b1868e4067b061ec7b4ad378ff6f74489a2",
+    722,
+    722,
+    0,
+    0,
+    0,
+    0,
+    74,
+    "",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    722,
+    "none",
+    "na"]}
+
+XML response for a search from Spotify Web API
+<?xml version='1.0' encoding='utf-8'?>
+  <result>
+    <version>1</version>
+    <total-artists>0</total-artists>
+    <artists/>
+    <total-albums>0</total-albums>
+    <albums/>
+
+    <total-tracks>1362</total-tracks>
+    <tracks>
+      <track>
+        <id>797de0ddf0a449caa4be26ebf04cf696</id>
+        <title>Creep</title>
+        <explicit>true</explicit>
+        <artist-id>a3d4a9be89174457bdd11d2ebd9aaf39</artist-id>
+        <artist>Radiohead</artist>
+        <album>Pablo Honey - Collector's Edition</album>
+        <album-id>d8beb7bccd9141fdb14f93c9f917c0d5</album-id>
+        <album-artist>Radiohead</album-artist>
+        <album-artist-id>a3d4a9be89174457bdd11d2ebd9aaf39</album-artist-id>
+        <year>2009</year>
+        <track-number>2</track-number>
+        <length>235931</length>
+        <files>
+          <file id=\"a0a6202ada06acac21fdcee259449f015cd1e7cd\" format=\"Ogg Vorbis,320000,1,32,4\"/><file id=\"8b835f80cd7fb7f4b4a9a7fec73d3e4377772822\" format=\"Ogg Vorbis,160000,1,32,4\"/><file id=\"fbd01dbaa68f63541e231252a9c6562eb05a328b\" format=\"Ogg Vorbis,96000,1,32,4\"/><file id=\"37c2c998423b26ed27aa61f4d54a3afe4c1213c2\" format=\"MPEG 1 layer 3,320000,1,32,4\"/>
+        </files>
+        <cover>64fbd77aa4b1bed917d81dcd1517e4862433c9a9</cover>
+        <cover-small>d5fa24bb31f80bb43cc73fb6a2fa502511d28eac</cover-small>
+        <cover-large>279def706eeedd93c38dddcc30c21de96393caa9</cover-large>
+        <popularity>0.72</popularity>
+        <restrictions>
+          <restriction catalogues=\"free,daypass,premium,shuffle\" forbidden=\"AF,BM,GL,JP,KG,MK,MM,PS,VA\"/>
+        </restrictions>
+        <external-ids>
+          <external-id type=\"isrc\" id=\"GBAYE9200070\"/>
+        </external-ids>
+      </track>
+    </tracks>
+  </result>
