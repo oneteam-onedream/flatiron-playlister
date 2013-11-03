@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 require 'yaml'
+require 'json'
 
 gem 'pry'
 
