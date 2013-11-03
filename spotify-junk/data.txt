@@ -41,6 +41,32 @@ When you are playing a song, this gets sent (notice the "4" means pause, above "
   ]
 }
 
+{
+  "id":377,
+  "name":"sp/track_end",
+  "args":
+  [
+    "0:797de0ddf0a449caa4be26ebf04cf696:2120998798232328:1383454032:30ebdd22d103f8eaf907b90fe2a14039ebcac1fe:98b32b1868e4067b061ec7b4ad378ff6f74489a2",
+    722,
+    722,
+    0,
+    0,
+    0,
+    0,
+    74,
+    "",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    "unknown",
+    722,
+    "none",
+    "na"]}
+
 XML response for a search from Spotify Web API
 <?xml version='1.0' encoding='utf-8'?>
   <result>
