@@ -5,6 +5,7 @@ require 'json'
 
 gem 'pry'
 
+gem 'thin'
 gem 'plaything'
 gem 'spotify'
 gem 'logger'
