@@ -45,12 +45,12 @@ class Playlist < Sequel::Model
   end
 
   def current_song
-    @song = self.songs_in_queue.shift
+    @song = self.song_sort[0]
     # @song.destroy
   end 
 
   def songs_in_queue
-    self.song_sort
+    self.song_sort.reject { |song| song == self.current_song }
   end
 
   def before_play
