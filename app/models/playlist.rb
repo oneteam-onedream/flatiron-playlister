@@ -13,7 +13,7 @@ class Playlist < Sequel::Model
   end
 
   def playlist_full?
-    self.songs.count > 20
+    self.songs.count > 1000000000
   end
 
   def playlist_full

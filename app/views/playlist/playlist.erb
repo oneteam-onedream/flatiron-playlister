@@ -5,12 +5,12 @@
     <% end %>
   </div>
 
-  <div class="left-column">
+ <div class="left-column">
     <div class="song_list">
       <ul>
         <% if @songs %>
           <% @songs.each_with_index do |song, i| %>
-            <% if i < 15 %>
+            <% if i < 10000000 %>
               <li> <%= song.upvotes %> - <a href="/songs/<%= song.id %>/upvote">  ۩  </a>   <%= song.song_name %>  </li>
             <% end %>
           <% end %>
@@ -18,19 +18,9 @@
       </ul>
     </div>
   </div>
-    <br>
-    
-  <div class="middle-column">
-    <img src="/img/boombox.png">
-    <div id="search">
-      <form action="/spotify" method="get">
-        <input type="text" name="search" placeholder="enter something">
-        <input type="submit" value="search">
-      </form>
-    </div>
-  </div>
+    <br> 
 
-  <div class="right-column">
+     <div class="right-column">
     <div class="search-results">
     <% if @queries %>
       <% @queries.each do |query| %>
@@ -42,6 +32,16 @@
         </form>
       <% end %>
     <% end %>
+    </div>
+  </div>
+    
+  <div class="middle-column">
+    <img src="/img/boombox.png">
+    <div id="search">
+      <form action="/spotify" method="get">
+        <input type="text" name="search" placeholder="enter something">
+        <input type="submit" value="search">
+      </form>
     </div>
   </div>
 </div>

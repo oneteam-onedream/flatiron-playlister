@@ -6,31 +6,52 @@ a {
   padding-top: 80px;
   width: 100%;
   text-align: center;
+  height: 100%;
+  min-height: 100%;
 }
 
 .now_playing {
-  clear: both;
+  
   text-align: center;
+  border: 1px solid blue;
+  
 }
 
+
 .left-column /* song list */ {
-  float: left;
+  bottom: 0;
+  left: 0;
+  width: 30;
   text-align: left;
-  width: 20%;
   border: 1px solid blue;
+  padding: 0 10px 0 0;
+  overflow-y: scroll;
+  height: 300px;
+  margin: 0 auto;
+  position: fixed;
+  height: 63.333%;
 }
 
 .middle-column /* search bar and radio */{
-  
-  text-align: center;
+  width: 30%;
   border: 1px solid blue;
-  left: 80px;
-  
-  display: inline-block;
+  margin: 0 auto;
 }
 
+ .middle-column  img {
+      width: 100%;
+      height: auto;    
+  }
+
 .right-column /* search results */ {
-  float: right;
+  
   border: 1px solid blue;
-  width: 10%;
+  float: right;
+  width: 30%;
+  margin: 0 auto;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 63.333%;
 }
