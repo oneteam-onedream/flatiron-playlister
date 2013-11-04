@@ -1,0 +1,47 @@
+<div class="mama">
+  <div class="now_playing">
+    <% if @current_song %>
+      Now playing: <%= @current_song.song_name %><br />
+    <% end %>
+  </div>
+
+  <div class="left-column">
+    <div class="song_list">
+      <ul>
+        <% if @songs %>
+          <% @songs.each_with_index do |song, i| %>
+            <% if i < 15 %>
+              <li> <%= song.upvotes %> - <a href="/songs/<%= song.id %>/upvote">  ۩  </a>   <%= song.song_name %>  </li>
+            <% end %>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+    <br>
+    
+  <div class="middle-column">
+    <img src="/img/boombox.png">
+    <div id="search">
+      <form action="/spotify" method="get">
+        <input type="text" name="search" placeholder="enter something">
+        <input type="submit" value="search">
+      </form>
+    </div>
+  </div>
+
+  <div class="right-column">
+    <div class="search-results">
+    <% if @queries %>
+      <% @queries.each do |query| %>
+        <form action="/playlist/add" method="post">
+          <input type="hidden" name="song[song_name]" value="<%= query[:song_name]%>">
+          <input type="hidden" name="song[artist_name]" value="<%= query[:artist_name]%>">
+          <input type="hidden" name="song[spotify_id]" value="<%= query[:spotify_id]%>">
+          <input type="submit" value="<%= query[:song_name] %>">
+        </form>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+</div>

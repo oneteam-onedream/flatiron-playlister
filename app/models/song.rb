@@ -11,15 +11,15 @@ class Song < Sequel::Model
     super
   end
 
-  # def add_or_remove(ip)
-  #   if Voter.find(:ip => ip)
-  #     Voter.find(:ip => ip).destroy
-  #   else 
-  #     self.voters << Voter.create{ |v| v.ip_address = ip }
-  #   end
-  # end
-
-  def vote
-    self.update(:upvotes => self.upvotes += 1)
+  def vote(ip)
+    if Voter.find(ip_address: ip, song_id: self.id) 
+      Voter.find(ip_address: ip, song_id: self.id).destroy
+    else
+      Voter.create do |v| 
+        v.ip_address = ip
+        v.song_id = self.id
+      end
+    end
+    self.update(upvotes: self.voters.uniq.length)
   end
 end

@@ -22,7 +22,7 @@ class Playlist < Sequel::Model
 
   def add_song(spotify_hash, user_ip)
     if !self.playlist_full?
-      if self.added_by_user(user_ip).length < 4
+      if self.added_by_user(user_ip).length < 100000000000000000000001
         Song.create do |s| 
             s.spotify_id  =  spotify_hash[:spotify_id]
              s.song_name  =  spotify_hash[:song_name]

@@ -1,0 +1,36 @@
+a {
+  text-decoration: none;
+}
+
+.mama {
+  padding-top: 80px;
+  width: 100%;
+  text-align: center;
+}
+
+.now_playing {
+  clear: both;
+  text-align: center;
+}
+
+.left-column /* song list */ {
+  float: left;
+  text-align: left;
+  width: 20%;
+  border: 1px solid blue;
+}
+
+.middle-column /* search bar and radio */{
+  
+  text-align: center;
+  border: 1px solid blue;
+  left: 80px;
+  
+  display: inline-block;
+}
+
+.right-column /* search results */ {
+  float: right;
+  border: 1px solid blue;
+  width: 10%;
+}
