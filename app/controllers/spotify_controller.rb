@@ -37,14 +37,6 @@ class SpotifyController < Sinatra::Base
     set :credentials, YAML.load(File.read('./spotify_credentials.yml'))
     set :spotify_session, $session
 
-    $search_complete = lambda do |search, userdata|
-      $logger.info "running search callback..."
-      $logger.info "searching for #{Spotify.search_query(search)}"
-    end
-      
-  end
-
-  get '/spotify/login' do
     Spotify.session_login(
       settings.spotify_session,
       settings.credentials['username'],
@@ -56,7 +48,10 @@ class SpotifyController < Sinatra::Base
       Spotify.session_connectionstate(settings.spotify_session) == :logged_in
     end
 
-    "Logged in!"
+    $search_complete = lambda do |search, userdata|
+      $logger.info "running search callback..."
+      $logger.info "searching for #{Spotify.search_query(search)}"
+    end
   end
 
   get '/spotify' do
