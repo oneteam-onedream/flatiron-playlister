@@ -37,14 +37,6 @@ class SpotifyController < Sinatra::Base
     set :credentials, YAML.load(File.read('./spotify_credentials.yml'))
     set :spotify_session, $session
 
-    $search_complete = lambda do |search, userdata|
-      $logger.info "running search callback..."
-      $logger.info "searching for #{Spotify.search_query(search)}"
-    end
-      
-  end
-
-  get '/spotify/login' do
     Spotify.session_login(
       settings.spotify_session,
       settings.credentials['username'],
@@ -56,13 +48,16 @@ class SpotifyController < Sinatra::Base
       Spotify.session_connectionstate(settings.spotify_session) == :logged_in
     end
 
-    "Logged in!"
+    $search_complete = lambda do |search, userdata|
+      $logger.info "running search callback..."
+      $logger.info "searching for #{Spotify.search_query(search)}"
+    end
   end
 
   get '/spotify' do
     search = Spotify.search_create(
       settings.spotify_session,
-      params[:q], 0, 1, 0, 0, 0, 0, 0, 0, :standard,
+      params[:q], 0, 10, 0, 0, 0, 0, 0, 0, :standard,
       $search_complete,
       nil
     )
@@ -71,12 +66,31 @@ class SpotifyController < Sinatra::Base
       Spotify.search_is_loaded(search)
     end
 
-    track = Spotify.search_track(search, 0)
+    results = {}
 
-    SpotifySupport.poll(settings.spotify_session) do
-      Spotify.track_is_loaded(track)
+    [10, Spotify.search_total_tracks(search)].min.times do |i|
+      track = Spotify.search_track(search, i)
+
+      SpotifySupport.poll(settings.spotify_session) do
+        Spotify.track_is_loaded(track)
+      end
+
+      # This feels odd, but the variable needs to be padded out for the FFI
+      # call to fill it correctly.
+      uri = 'a' * 64
+      link = Spotify.link_create_from_track(track, 0)
+      Spotify.link_as_string(link, uri, uri.size)
+
+      # When uri gets filled out, it is "null terminated", we want the part
+      # before the null termination - the Spotify link, or uri
+      result = {
+        "uri" => uri.split(/\0/)[0],
+        "song_name" => Spotify.track_name(track),
+        "artist_name" => Spotify.artist_name(Spotify.track_artist(track, 0)),
+        "album_name" => Spotify.album_name(Spotify.track_album(track))
+      }
+      results["result_#{i}"] = result
     end
-
-    Spotify.track_name(track)
+    results.to_json
   end
 end
