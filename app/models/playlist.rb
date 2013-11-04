@@ -24,9 +24,10 @@ class Playlist < Sequel::Model
     if !self.playlist_full?
       if self.added_by_user(user_ip).length < 4
         Song.create do |s| 
-            s.spotify_id  =  spotify_hash[:spotify_id]
-             s.song_name  =  spotify_hash[:song_name]
-           s.artist_name  =  spotify_hash[:artist_name]
+            s.uri  =  spotify_hash["uri"]
+             s.song_name  =  spotify_hash["song_name"]
+           s.artist_name  =  spotify_hash["artist_name"]
+            s.album_name  =  spotify_hash["album_name"]
             s.created_at  = Time.now
            s.playlist_id  =  self.id
             s.creator_ip  =  user_ip

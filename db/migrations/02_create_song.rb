@@ -5,7 +5,7 @@ Sequel.migration  do
       foreign_key :playlist_id, :playlists
       String :song_name
       String :artist_name
-      String :spotify_id
+      String :uri
       Integer :length
       DateTime :created_at
       String :creator_ip
