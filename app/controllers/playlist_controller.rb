@@ -12,15 +12,6 @@ class PlaylistController < ApplicationController
     erb :'results'
   end
 
-  # post '/playlist/add/:song' do
-  #   @song = Playlist[1].add_song(params[:song], request.ip)
-  #   if @song == :user_limit_met
-  #     redirect '/playlist/user_limit'
-  #   elsif @song == :playlist_full
-  #     redirect '/playlist/full'
-  #   end
-  # end
-
   post '/playlist/add' do
     @song = Playlist[1].add_song(params[:song], request.ip)
     if @song == :user_limit_met
