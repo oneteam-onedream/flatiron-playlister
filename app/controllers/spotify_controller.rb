@@ -1,4 +1,29 @@
 class SpotifyController < Sinatra::Base
+  class FrameReader
+    include Enumerable
+
+    def initialize(channels, sample_type, frames_count, frames_ptr)
+      @channels = channels
+      @sample_type = sample_type
+      @size = frames_count * @channels
+      @pointer = FFI::Pointer.new(@sample_type, frames_ptr)
+    end
+
+    attr_reader :size
+
+    def each
+      return enum_for(__method__) unless block_given?
+
+      ffi_read = :"read_#{@sample_type}"
+
+      (0...size).each do |index|
+        yield @pointer[index].public_send(ffi_read)
+      end
+    end
+  end
+
+  plaything = Plaything.new
+
   configure do
     $logger = Logger.new($stderr)
     $logger.level = Logger::INFO
@@ -18,6 +43,41 @@ class SpotifyController < Sinatra::Base
 
       credentials_blob_updated: lambda do |session, blob|
         $logger.info('session (blob)') { blob }
+      end,
+
+      start_playback: proc do |session|
+        $logger.debug("session (player)") { "start playback" }
+        plaything.play
+      end,
+
+      stop_playback: proc do |session|
+        $logger.debug("session (player)") { "stop playback" }
+        plaything.stop
+      end,
+
+      get_audio_buffer_stats: proc do |session, stats|
+        stats[:samples] = plaything.queue_size
+        stats[:stutter] = plaything.drops
+        $logger.debug("session (player)") { "queue size [#{stats[:samples]}, #{stats[:stutter]}]" }
+      end,
+
+      music_delivery: proc do |session, format, frames, num_frames|
+        if num_frames == 0
+          $logger.debug("session (player)") { "music delivery audio discontuity" }
+          plaything.stop
+          0
+        else
+          frames = FrameReader.new(format[:channels], format[:sample_type], num_frames, frames)
+          consumed_frames = plaything.stream(frames, format.to_h)
+          $logger.debug("session (player)") { "music delivery #{consumed_frames} of #{num_frames}" }
+          consumed_frames
+        end
+      end,
+
+      end_of_track: proc do |session|
+        $end_of_track = true
+        $logger.debug("session (player)") { "end of track" }
+        plaything.stop
       end
     }
 
@@ -92,5 +152,17 @@ class SpotifyController < Sinatra::Base
       results["result_#{i}"] = result
     end
     results.to_json
+  end
+
+  get '/spotify/play/:uri' do
+    link = Spotify.link_create_from_string(params[:uri])
+    track = Spotify.link_as_track(link)
+    SpotifySupport.poll(settings.spotify_session) { Spotify.track_is_loaded(track) }
+
+    Spotify.try(:session_player_play, settings.spotify_session, false)
+    Spotify.try(:session_player_load, settings.spotify_session, track)
+    Spotify.try(:session_player_play, settings.spotify_session, true)
+    SpotifySupport.poll(settings.spotify_session) { $end_of_track }
+    "got here somehow"
   end
 end
