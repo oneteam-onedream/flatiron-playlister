@@ -1,0 +1,4 @@
+.spotify
+Gemfile.lock
+tmp
+db/*.db
