@@ -1,3 +1,4 @@
+
 a {
   text-decoration: none;
 }
@@ -29,15 +30,16 @@ a {
 .left-column /* song list */ {
  border: 2px solid black;
  text-align: left;
-  float: left;
-  width: 25%;
-  margin: 0 auto;
   padding: 10px 0;
-  position: fixed;
-  bottom: 8%;
-  left: 3%;
-  height: 63.333%;
+  height: 100%;
+  
+}
+
+.list {
   overflow-y: scroll;
+  margin-top: 5%;
+  height: 95%;
+
 }
 
 
@@ -52,6 +54,14 @@ a {
 
 }
 
+
+
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
 #song_info {
   
   width: 100%;
@@ -62,20 +72,44 @@ a {
   display: inline-block;*/
   /*float: right;*/
   margin-left: 50%;
+  font: 18px/1.5em sans-serif;
+  padding-right: 9px;
 
 }
 
-#upvote {
+.upvote {
  
-  width: 30%;
+  width: 15px;
   position: relative; 
   left: 5%;
   top: 80%;
   float: left;
   display: inline-block;
-  margin-top: 5%;
+  margin-top: 15%;
   font-size: 25px;
 
+}
+
+.upvote-count {
+  margin: 14% 1% 10% 13%;
+  float: left;
+  display: inline-block;
+  font-size: 25px;
+  font-family: futura;
+
+}
+
+#list a:link, #list a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+#list a:active {
+  color: red;
+}
+
+.upvote:hover {
+  font-size: 28px;
 }
 
 
@@ -121,3 +155,35 @@ li
       height: auto;    
   }
 
+
+  .left-container h2, .right-container h2 {
+    font-family: sans-serif;
+    margin: 0 0 0 20px;
+    padding: 10px;
+    line-height: 0;
+    background: white;
+    position: relative;
+    top: 10px;
+    display: inline;
+
+  }
+
+
+
+.left-container {
+  width: 25%;
+  position: fixed;
+  bottom: 8%;
+  left: 3%;
+  height: 63.333%;
+  text-align: left;
+}
+
+.right-container {
+  width: 25%;
+  position: fixed;
+  bottom: 10%;
+  right: 3%;
+  height: 63.333%;
+  text-align: left;
+}

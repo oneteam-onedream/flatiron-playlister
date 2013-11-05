@@ -7,20 +7,28 @@
   <div class="flatiron">
     <img src="/img/flatiron.png">
   </div>
+<div class="left-container">
+  <h2> PLAYLIST </h2>
  <div class="left-column">
-    <div class="song_list">
+  <div class="list">
       <ul>
         <% if @songs %>
           <% @songs.each_with_index do |song, i| %>
             <% if i < 10000000 %>
               <div id="list">
                 <li>
-                  <div id="upvote">
-                  <a href="/songs/<%= song.id %>/upvote">  ۩  </a> <%= song.upvotes %>    
+                  <a href="/songs/<%= song.id %>/upvote">
+                  <div class="fa fa-arrow-up upvote" >
+                        
                   </div>
+                  </a>
+                  <div class="upvote-count">
+                  <%= song.upvotes %> 
+                  </div>
+                  
                   <div id="song_info">
-                  <%= song.song_name %> <br>
-                  <%= song.song_name %> <br>
+                  <%= song.song_name %>  <br>
+                  <%= song.song_name %>  <br>
                   <%= song.song_name %> <br>
                   </div>
                 </li>
@@ -29,11 +37,14 @@
           <% end %>
         <% end %>
       </ul>
+      </div>
     </div>
-  </div>
+   </div>
     <br> 
-
+    <div class="right-container">
+      <h2> SEARCH RESULTS </h2>
      <div class="right-column">
+
     <div class="search-results">
     <% if @queries %>
       <% @queries.each do |query| %>
@@ -47,6 +58,7 @@
     <% end %>
     </div>
   </div>
+</div>
     
   <div class="middle-column">
     <img src="/img/boombox.png">
