@@ -1,3 +1,7 @@
+Deprecated!  Use Playlister round two repo
+========
+
+
 flatiron-playlister
 ===================
 
