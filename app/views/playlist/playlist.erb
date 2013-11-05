@@ -1,17 +1,30 @@
 <div class="mama">
   <div class="now_playing">
     <% if @current_song %>
-      Now playing: <%= @current_song.song_name %><br />
+      Now playing: <br> <%= @current_song.song_name %><br />
     <% end %>
   </div>
-
+  <div class="flatiron">
+    <img src="/img/flatiron.png">
+  </div>
  <div class="left-column">
     <div class="song_list">
       <ul>
         <% if @songs %>
           <% @songs.each_with_index do |song, i| %>
             <% if i < 10000000 %>
-              <li> <%= song.upvotes %> - <a href="/songs/<%= song.id %>/upvote">  ۩  </a>   <%= song.song_name %>  </li>
+              <div id="list">
+                <li>
+                  <div id="upvote">
+                  <a href="/songs/<%= song.id %>/upvote">  ۩  </a> <%= song.upvotes %>    
+                  </div>
+                  <div id="song_info">
+                  <%= song.song_name %> <br>
+                  <%= song.song_name %> <br>
+                  <%= song.song_name %> <br>
+                  </div>
+                </li>
+              </div>
             <% end %>
           <% end %>
         <% end %>
@@ -40,6 +53,7 @@
     <div id="search">
       <form action="/spotify" method="get">
         <input type="text" name="search" placeholder="enter something">
+        <br>
         <input type="submit" value="search">
       </form>
     </div>

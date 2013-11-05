@@ -2,6 +2,7 @@ a {
   text-decoration: none;
 }
 
+
 .mama {
   padding-top: 80px;
   width: 100%;
@@ -10,31 +11,108 @@ a {
   min-height: 100%;
 }
 
+
+.right-column /* search results */ {
+  
+  border: 2px solid black;
+  float: right;
+  width: 25%;
+  margin: 0 auto;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 8%;
+  right: 3%;
+  height: 63.333%;
+  overflow-y: scroll;
+}
+
+.left-column /* song list */ {
+ border: 2px solid black;
+ text-align: left;
+  float: left;
+  width: 25%;
+  margin: 0 auto;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 8%;
+  left: 3%;
+  height: 63.333%;
+  overflow-y: scroll;
+}
+
+
+
+#list {
+  border: 2px solid black;
+  width:80%;
+  margin: 5%;
+  overflow: auto;
+  height: 100%;
+  min-height: 100%;
+
+}
+
+#song_info {
+  
+  width: 100%;
+  text-align: left;
+  /*position: relative; 
+  left: 30%;
+  top: 80%;
+  display: inline-block;*/
+  /*float: right;*/
+  margin-left: 50%;
+
+}
+
+#upvote {
+ 
+  width: 30%;
+  position: relative; 
+  left: 5%;
+  top: 80%;
+  float: left;
+  display: inline-block;
+  margin-top: 5%;
+  font-size: 25px;
+
+}
+
+
+.flatiron img {
+  float: left;
+  position: fixed;
+  top: 3%;
+  left: 4%;
+  width: 15%;
+}
+
+
+
 .now_playing {
   
   text-align: center;
-  border: 1px solid blue;
+  
+  font-size: 20px;
+  width: 30%;
+  margin: 0 auto;
   
 }
 
 
-.left-column /* song list */ {
-  bottom: 0;
-  left: 0;
-  width: 30;
-  text-align: left;
-  border: 1px solid blue;
-  padding: 0 10px 0 0;
-  overflow-y: scroll;
-  height: 300px;
-  margin: 0 auto;
-  position: fixed;
-  height: 63.333%;
+
+
+li
+{
+    list-style-type: none;
+    border-radius: 2px;
+    margin: 5px;
+    padding: 2px;
+    width: 66.666%;
 }
 
 .middle-column /* search bar and radio */{
-  width: 30%;
-  border: 1px solid blue;
+  width: 40%;
   margin: 0 auto;
 }
 
@@ -43,15 +121,3 @@ a {
       height: auto;    
   }
 
-.right-column /* search results */ {
-  
-  border: 1px solid blue;
-  float: right;
-  width: 30%;
-  margin: 0 auto;
-  padding: 10px 0;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  height: 63.333%;
-}
