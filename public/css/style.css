@@ -12,19 +12,39 @@ a {
   min-height: 100%;
 }
 
+#bar {
+  width: 80%;
+  height: 45px;
+  font-size: 18px;
+}
+
+input[id="search-button"] {
+  width: 80px;
+  height: 47px;
+  background: #FF9900;
+  color: white;
+  box-shadow: 0 0 2px grey;
+  border: 1px solid white;
+  border-radius: 1px ; /* rounding edges!!! */
+  font-size: 15px;
+  font-style: sans-serif;
+  cursor: pointer;
+
+}
+
+
+input[id="search-button"]:hover {
+  background: #FF8000;
+}
+
 
 .right-column /* search results */ {
   
   border: 2px solid black;
-  float: right;
-  width: 25%;
-  margin: 0 auto;
+ text-align: left;
   padding: 10px 0;
-  position: fixed;
-  bottom: 8%;
-  right: 3%;
-  height: 63.333%;
-  overflow-y: scroll;
+  height: 100%;
+  font-size: 18px;
 }
 
 .left-column /* song list */ {
@@ -35,14 +55,61 @@ a {
   
 }
 
-.list {
+.list-play {
+  overflow-y: scroll;
+  margin-top: 5%;
+  height: 95%;
+}
+
+#search-hide {
+ border: 2px solid black;
+ position: relative;
+  width:70%;
+  margin-left: 15%;
+  margin-top: 5%;
+  overflow: auto;
+  height: 100%;
+  min-height: 100%;
+ background: white;
+ cursor: pointer;
+ font: 18px/1.5em sans-serif;
+ float: right;
+ display: inline-block;
+
+}
+
+/*.search-results {
+  border: 2px solid green;
+  width:80%;
+  margin: 5%;
+  overflow: auto;
+  height: 100%;
+  min-height: 100%;
+}*/
+
+#search {
+  /*border: 2px solid red;*/
+  height: 40px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.divimage-search-hide {
+  border: 2px solid black;
+  width:90%;
+  margin: 5%;
+  overflow: auto;
+  height: 100%;
+  min-height: 100%;
+  padding-bottom: 20px;
+  padding-right: 10px;
+}
+.list-search {
   overflow-y: scroll;
   margin-top: 5%;
   height: 95%;
 
 }
-
-
 
 #list {
   border: 2px solid black;
@@ -55,7 +122,6 @@ a {
 }
 
 
-
 * {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -66,11 +132,7 @@ a {
   
   width: 100%;
   text-align: left;
-  /*position: relative; 
-  left: 30%;
-  top: 80%;
-  display: inline-block;*/
-  /*float: right;*/
+
   margin-left: 50%;
   font: 18px/1.5em sans-serif;
   padding-right: 9px;
@@ -126,14 +188,16 @@ a {
 .now_playing {
   
   text-align: center;
-  
-  font-size: 20px;
+  font: 18px/1.5em sans-serif;
+  font-size: 22px;
   width: 30%;
-  margin: 0 auto;
+  margin: -10px auto;
   
 }
 
-
+#search-hide:hover {
+  color: grey;
+}
 
 
 li
@@ -169,6 +233,29 @@ li
   }
 
 
+  .divimage {
+   
+    /*position: relative;
+  margin-left: 20px;
+  margin-top: 12px;
+  float: left;
+  border: 2px solid pink;
+  width: 71px;
+  height: 71px;
+  display: inline-block;*/
+  /*border: 2px solid pink;*/
+   width: 15px;
+  position: relative; 
+  left: 5%;
+  top: 80%;
+  float: left;
+  display: inline-block;
+  margin-top: 7%;
+  font-size: 25px;
+
+  }
+
+
 
 .left-container {
   width: 25%;
@@ -177,12 +264,13 @@ li
   left: 3%;
   height: 63.333%;
   text-align: left;
+  /*border: 2px solid green;*/
 }
 
 .right-container {
   width: 25%;
   position: fixed;
-  bottom: 10%;
+  bottom: 8%;
   right: 3%;
   height: 63.333%;
   text-align: left;

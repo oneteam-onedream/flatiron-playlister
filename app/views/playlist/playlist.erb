@@ -1,16 +1,18 @@
+<!-- real slim shayd -->
+
 <div class="mama">
   <div class="now_playing">
     <% if @current_song %>
-      Now playing: <br> <%= @current_song.song_name %><br />
+      Now playing: <br> <%= @current_song.song_name %>
     <% end %>
   </div>
   <div class="flatiron">
-    <img src="/img/flatiron.png">
+    <img src="/img/flatiron_black.png">
   </div>
 <div class="left-container">
   <h2> PLAYLIST </h2>
  <div class="left-column">
-  <div class="list">
+  <div class="list-play">
       <ul>
         <% if @songs %>
           <% @songs.each_with_index do |song, i| %>
@@ -44,18 +46,134 @@
     <div class="right-container">
       <h2> SEARCH RESULTS </h2>
      <div class="right-column">
+    <div class="list-search">
+    <!-- <div class="search-results"> -->
 
-    <div class="search-results">
     <% if @queries %>
       <% @queries.each do |query| %>
         <form action="/playlist/add" method="post">
           <input type="hidden" name="song[song_name]" value="<%= query[:song_name]%>">
           <input type="hidden" name="song[artist_name]" value="<%= query[:artist_name]%>">
           <input type="hidden" name="song[spotify_id]" value="<%= query[:spotify_id]%>">
-          <input type="submit" value="<%= query[:song_name] %>">
+          <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+           <div class="divimage-search-hide">
+          <div class="divimage">
+            <img src="/img/boombox.png" height="70" width="70">
+          </div>
+          <input type="submit" id="search-hide" value="<%= query[:song_name]%>&#13;&#10; <%=query[:song_name]%>&#13;&#13;&#10; <%=query[:song_name]%>&#13;">
+          <br>
+          </div>
+          
+
+          
         </form>
       <% end %>
     <% end %>
+      <!-- </div> -->
     </div>
   </div>
 </div>
@@ -64,9 +182,8 @@
     <img src="/img/boombox.png">
     <div id="search">
       <form action="/spotify" method="get">
-        <input type="text" name="search" placeholder="enter something">
-        <br>
-        <input type="submit" value="search">
+        <input id="bar" type="text" name="search" placeholder="search by song, artist or album name">
+        <input type="submit" value="SEARCH" id="search-button">
       </form>
     </div>
   </div>
