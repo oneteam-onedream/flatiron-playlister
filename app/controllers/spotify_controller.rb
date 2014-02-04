@@ -1,4 +1,5 @@
 class SpotifyController < Sinatra::Base
+  enable :sessions
   class FrameReader
     include Enumerable
 
@@ -151,8 +152,11 @@ class SpotifyController < Sinatra::Base
       }
       results["result_#{i}"] = result
     end
-    results.to_json
+    # results.to_json
+    session[:queries] = results
+    redirect '/playlist'
   end
+  set :views, File.expand_path('../../views', __FILE__)
 
   get '/spotify/play/:uri' do
     link = Spotify.link_create_from_string(params[:uri])

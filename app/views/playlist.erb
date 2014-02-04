@@ -22,10 +22,10 @@
 <% if @queries %>
   <% @queries.each do |query| %>
     <form action="/playlist/add" method="post">
-      <input type="hidden" name="song[song_name]" value="<%= query[:song_name]%>">
-      <input type="hidden" name="song[artist_name]" value="<%= query[:artist_name]%>">
-      <input type="hidden" name="song[spotify_id]" value="<%= query[:spotify_id]%>">
-      <input type="submit" value="<%= query[:song_name] %>">
+      <input type="hidden" name="song[song_name]" value="<%= query[1]["song_name"]%>">
+      <input type="hidden" name="song[artist_name]" value="<%= query[1]["artist_name"]%>">
+      <input type="hidden" name="song[uri]" value="<%= query[1]["uri"]%>">
+      <input type="submit" value="<%= query[1]["song_name"]%>" >
     </form>
   <% end %>
 <% end %>

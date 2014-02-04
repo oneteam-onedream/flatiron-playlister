@@ -1,29 +1,16 @@
 class PlaylistController < ApplicationController
   enable :sessions
 
-  # def upvote_or_unvote(song, ip)
-  #   if session[:song_votes].keys.include?(song.id)
-  #     if session[:song_votes][song.id].include?(ip)
-  #       song.unvote
-  #       session[:song_votes][song.id].delete(ip)
-  #     else
-  #       song.upvote
-  #       session[:song_votes][song.id] << ip
-  #     end
-  #   end
-  # end
-
   get '/' do
     Playlist.create
     redirect '/playlist'
     #session[:song_votes] = {}
   end
 
-  # get '/spotify' do
-  #   @queries = Spotify_Finder.search(params[:search])
-  #   session[:queries] = @queries
-  #   redirect '/playlist'
-  # end
+  get '/playlist/results' do
+    @results = session[:results]
+    erb :'results'
+  end
 
   post '/playlist/add' do
     @song = Playlist[1].add_song(params[:song], request.ip)

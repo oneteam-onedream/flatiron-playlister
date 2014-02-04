@@ -1,1 +1,10 @@
-<a href="/playlist/add/<%= @query[:uri] %>"><%= @query[:song_name] %></a>
+<% if @queries %>
+  <% @queries.each do |query| %>
+    <form action="/playlist/add" method="post">
+      <input type="hidden" name="song[song_name]" value="<%= query[1]["song_name"]%>">
+      <input type="hidden" name="song[artist_name]" value="<%= query[1]["artist_name"]%>">
+      <input type="hidden" name="song[spotify_id]" value="<%= query[1]["uri"]%>">
+      <input type="submit" value="<%= query[1]["song_name"]%>" >
+    </form>
+  <% end %>
+<% end %>
